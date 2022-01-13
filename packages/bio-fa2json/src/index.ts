@@ -49,8 +49,8 @@ class Processor {
     this.cache.length = 0;
 
     return {
-      title: items[0],
-      children: this.options.stringify ? children.join('') : children
+      name: items[0],
+      value: this.options.stringify ? children.join('') : children
     };
   }
 }
