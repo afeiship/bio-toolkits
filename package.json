@@ -1,14 +1,26 @@
 {
-  "name": "@feizheng/scrapy-notes",
-  "version": "1.0.0",
-  "description": "Scrapy learning notes.",
-  "homepage": "https://github.com/afeiship",
-  "author": {
-    "name": "afeiship",
-    "email": "1290657123@qq.com"
+  "name": "@jswork/bio-toolkits",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   },
-  "license": "MIT",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "scripts": {
+    "start": "yarn --cwd packages/websites start",
+    "lerna:clean": "lerna clean",
+    "lerna:list": "lerna list",
+    "lerna:bootstrap": "lerna bootstrap",
+    "build": "lerna run build --since master --no-private",
+    "publish": "npm run build && lerna publish --no-private"
+  },
+  "boilerplate": "bio-toolkits",
+  "homepage": "https://js.work",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afeiship/bio-toolkits.git"
   }
 }
