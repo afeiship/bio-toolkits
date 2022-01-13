@@ -1,7 +1,12 @@
 import fs from 'fs';
 
-const defaults = {
-  charset: 'utf8',
+interface Options {
+  encoding?: any;
+  stringify?: boolean;
+}
+
+const defaults: Options = {
+  encoding: 'utf8',
   stringify: false
 };
 
@@ -10,35 +15,39 @@ class Processor {
   private readonly lines;
   private readonly cache;
   private readonly result;
-  private readonly options;
+  private readonly options: Options;
 
-  constructor(filename, options?) {
-    this.options = { ...defaults, options };
-    this.content = fs.readFileSync(filename, this.options.charset).toString();
+  constructor(inFilename, inOptions?) {
+    this.options = { ...defaults, ...inOptions };
+    this.content = fs.readFileSync(inFilename, this.options.encoding).toString();
     this.lines = this.content.split('\n');
     this.cache = [];
     this.result = [];
   }
 
   start() {
-    this.lines.forEach((line) => {
-      if (line.trim()) {
-        if (line.includes('>')) {
-          const res = this.process();
-          if (res) this.result.push(res);
-        }
-        this.cache.push(line);
-      }
-    });
-
+    for (let i = 0; i < this.lines.length; i++) {
+      const line = this.lines[i].trim();
+      if (!line) continue;
+      if (line.includes('>')) this.check();
+      this.cache.push(line);
+    }
+    this.check();
     return this.result;
   }
+
+  check() {
+    const res = this.process();
+    if (res) this.result.push(res);
+  }
+
 
   process() {
     if (!this.cache.length) return null;
     const items = this.cache.slice();
     const children = items.slice(1);
     this.cache.length = 0;
+
     return {
       title: items[0],
       children: this.options.stringify ? children.join('') : children
@@ -47,7 +56,7 @@ class Processor {
 }
 
 
-export default (filename, options?) => {
-  const processor = new Processor(filename, options);
+export default (inFilename, inOptions?) => {
+  const processor = new Processor(inFilename, inOptions);
   return processor.start();
 }
