@@ -1,6 +1,6 @@
 {
   "name": "@jswork/bio-seq-chunks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sequence chunks.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
