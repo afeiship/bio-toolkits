@@ -26,14 +26,14 @@ export default (inSeq: string, inOptions?: SeqChunkSInput): SeqChunkSOutput => {
 
   for (let i = 0; i < inSeq.length; i += lineCount) {
     const idxHead = i + 1;
-    const idx_tail = i + lineCount;
+    const idxTail = i + lineCount;
     const str = inSeq.slice(i, i + lineCount);
     if (idxHead % lineCount === 1) {
       res.head.push(idxHead);
     }
 
-    if (idx_tail % lineCount === 0) {
-      res.tail.push(idx_tail);
+    if (idxTail % lineCount === 0) {
+      res.tail.push(idxTail);
     }
 
     res.body.push(nxChunk(str, chunkSize));
