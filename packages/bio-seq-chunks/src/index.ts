@@ -8,7 +8,7 @@ interface SeqChunkSInput {
 interface SeqChunkSOutput {
   head: number[];
   tail: number[];
-  body: string[];
+  body: string[][];
 }
 
 const defaults: SeqChunkSInput = {

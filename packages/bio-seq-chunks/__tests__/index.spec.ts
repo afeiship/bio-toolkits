@@ -2,7 +2,8 @@ import fn from '../src';
 
 describe('api.basic', () => {
   test('normail single value case', () => {
-    const seq = 'MIRNKAFVVRLYPNAAQTELINRTLGSARFVY' +
+    const seq =
+      'MIRNKAFVVRLYPNAAQTELINRTLGSARFVY' +
       'NHFLARRIAAYKESGKGLTYGQTSSELTLLKQAEETSWLSEV' +
       'DKFALQNSLKNLETAYKNFFRTVKQSGKKVGFPRFRKKRTGE' +
       'SYRTQFTNNNIQIGEGRLKLPKLGWVKTKGQQDIQGKILNVT' +
@@ -14,17 +15,8 @@ describe('api.basic', () => {
       'RREALVAAGISDTLNAHGGYVRPASAGNGLRSENHATLVV';
 
     const result = fn(seq);
-    expect(result.head).toEqual([
-      1, 61, 121, 181,
-      241, 301, 361
-    ]);
-
+    expect(result.head).toEqual([1, 61, 121, 181, 241, 301, 361]);
     expect(result.body.length).toEqual(7);
-
-    expect(result.tail).toEqual([
-      60, 120, 180,
-      240, 300, 360,
-      420
-    ])
+    expect(result.tail).toEqual([60, 120, 180, 240, 300, 360, 420]);
   });
 });
