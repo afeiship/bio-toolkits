@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 interface Options {
   encoding?: any;
   stringify?: boolean;
@@ -17,9 +15,9 @@ class Processor {
   private readonly result;
   private readonly options: Options;
 
-  constructor(inFilename, inOptions?) {
+  constructor(inContent, inOptions?) {
     this.options = { ...defaults, ...inOptions };
-    this.content = fs.readFileSync(inFilename, this.options.encoding).toString();
+    this.content = inContent;
     this.lines = this.content.split('\n');
     this.cache = [];
     this.result = [];
